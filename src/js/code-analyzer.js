@@ -336,7 +336,7 @@ function help3_help4(temp_arr_no_label1,temp_arr_no_label,temp_arr2,index_end,i,
 
 
 function inclued_operator_label(label1,label2) {
-    let operators=['<','>','<=','>=','|','&','&&','||'];
+    let operators=['<','>','<=','>=','|','&','&&','||','=='];
     for(let j=0;j<operators.length;j++){
         if(label1.includes(operators[j]) || label2.includes(operators[j])){
             return true;
@@ -356,15 +356,18 @@ function  help4(arr) {
     }
 }
 function help4_help(arr,i) {
+    if(arr[i].includes('==')){
+        arr[i]=arr[i].replace(']',',shape="diamond"]');
+    }
     /* if((arr[i].includes('>=')) ||  (arr[i].includes('<='))){
         arr[i]=arr[i].replace(']',',shape="diamond"]');
     }*/
     /* else if((arr[i].includes('&')) ||  (arr[i].includes('&&'))){
         arr[i]=arr[i].replace(']',',shape="diamond"]');
     }*/
-    //else{
-    help4_help_help(arr,i);
-    //}
+    else{
+        help4_help_help(arr,i);
+    }
 }
 function help4_help_help(arr,i) {
     /* if((arr[i].includes('|')) ||  (arr[i].includes('||'))){
@@ -501,7 +504,7 @@ function help8(arr) {
 }
 
 function inclued_operator(i) {
-    let operators=['<','>','<=','>=','|','&','&&','||'];
+    let operators=['<','>','<=','>=','|','&','&&','||','=='];
     for(let j=0;j<operators.length;j++){
         if(temp_for_check[i].includes(operators[j])){
             return true;

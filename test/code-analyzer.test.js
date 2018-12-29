@@ -39,6 +39,7 @@ describe('The javascript parser', () => {
     test8();
     test9();
     test10();
+    test11();
 
 
 }
@@ -197,6 +198,22 @@ function test10() {
     let arr=dot.split('\n');
     let dot_ans= 'n0 [label="-1-\n a = x + 1;\n b = a + y;\n c = 0;",shape="square"]\nn3 [label="-2-\na < z || a<1",shape="diamond"]\nn4 [label="-3-\nc++\na=a+1",shape="square"]\nn6 [label="-4-\nreturn z;",shape="square"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
     it('test10', () => {
+        assert.equal(create_cfg(arr, dot, evals_color),dot_ans );
+    });
+}
+
+function test11() {
+    const esgraph=require('esgraph');
+    let source='function foo(x, y, z){\n' +        '    let a = x + 1;\n' +        '    let b = a + y;\n' +        '    let c = 0;\n' +        '    \n' +        '    if (b == z) {\n' +        '        c = c + 5;\n' +        '    } else if (b < z * 2) {\n' +        '        c = c + x + 5;\n' +        '    } else {\n' +        '        c = c + z + 5;\n' +        '    }\n' +        '    \n' +        '    return c;\n' +        '}\n'  ;
+    let params_string= '1|2|3';
+    let evals_color1 = parseCode_eval(source,params_string);
+    let evals_color=evals_color1.split('<br>');
+    const cfg=esgraph(esprima.parse(source,{range:true}).body[0].body);
+    start(cfg);
+    let dot=esgraph.dot(cfg,{counter:0,source:source});
+    let arr=dot.split('\n');
+    let dot_ans= 'n0 [label="-1-\n a = x + 1;\n b = a + y;\n c = 0;",style=filled ,color="green",shape="square"]\nn3 [label="-2-\nb == z",color="green",style=filled ,shape="diamond"]\nn4 [label="-3-\nc = c + 5",color="",shape="square"]\nn5 [label="-4-\nreturn c;",style=filled ,color="green",shape="square"]\nn6 [label="-5-\nb < z * 2",style=filled ,color="green",style=filled ,color="green",shape="diamond"]\nn7 [label="-6-\nc = c + x + 5",style=filled ,color="green",shape="square"]\nn8 [label="-7-\nc = c + z + 5",color="",shape="square"]\nn18[label="",style=filled ,color=green]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n18[]\nn6 -> n7 [label="T"]\nn6 -> n8 [label="F"]\nn7 -> n18[]\nn8 -> n18[]\nn18->n5 []';
+    it('test11', () => {
         assert.equal(create_cfg(arr, dot, evals_color),dot_ans );
     });
 }
