@@ -13,5 +13,5 @@ script:
 notifications:
   email:
     recipients:
-      - shaharcoral@gmail.com
+      - shaharcoral1@gmail.com
     on_failure: always
