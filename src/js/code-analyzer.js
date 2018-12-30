@@ -32,6 +32,9 @@ function change_color(arr,evals_color) {
     if(has_if) {
         change_color_help(evals_color);
     }
+    /*  else if(!has_if){
+        change_color_after();
+    }*/
 }
 
 function  change_color_help(evals_color) {
@@ -51,6 +54,8 @@ function change_color_help2(evals_color,i) {
 
 }
 function change_color_help2_help(j,evals_color,i){
+
+
     if (evals_color[j].includes('if') && evals_color[j].includes('green') && found_if==false) {
         found_if=true;
         j=change_color_help_if_yes(evals_color,i,j);
@@ -60,6 +65,8 @@ function change_color_help2_help(j,evals_color,i){
         j=change_color_help_if_no(evals_color,i,j);
 
     }
+
+
 
     return j;
 }
@@ -82,7 +89,7 @@ function change_color_help_if_no(evals_color,i,j) {
 }
 function change_color_help_if_no_help(t,label_string,label_string_2) {
     for (let k = 0; k < temp_for_check.length; k++) {
-        if (!(temp_for_check[t].includes('color')) && !(temp_for_check[t].includes('->'))) {
+        if (!(temp_for_check[t].includes('color')) && !(temp_for_check[t].includes('->')) && !(inclued_operator(t))) {
 
             check_if_change(k,label_string,label_string_2,t);
         }
@@ -91,21 +98,21 @@ function change_color_help_if_no_help(t,label_string,label_string_2) {
 
 function check_if_change(k,label_string,label_string_2,t) {
 
-    if (temp_for_check[k].includes('T') && temp_for_check[k].includes(label_string) && temp_for_check[k].includes(label_string_2)) {
+    if (temp_for_check[k].includes(label_string) && temp_for_check[k].includes(label_string_2)) {
 
         temp_for_check[t] = temp_for_check[t].replace('[', '[color="red",');
     }
-    else{
+    /*  else{
         check_if_change_help(k,label_string,label_string_2,t);
-    }
+    }*/
 
 }
-function check_if_change_help(k,label_string,label_string_2,t) {
+/*function check_if_change_help(k,label_string,label_string_2,t) {
 
     if (temp_for_check[k].includes('F') && temp_for_check[k].includes(label_string) && temp_for_check[k].includes(label_string_2)) {
         temp_for_check[t] = temp_for_check[t].replace('[', '[style=filled ,color="green",');
     }
-}
+}*/
 
 function change_color_help_if_yes(evals_color,i,j) {
     temp_for_check[i] = temp_for_check[i].replace('[', '[style=filled ,color="green",');
@@ -127,7 +134,7 @@ function change_color_help_if_yes_help1(t,label_string,label_string_2) {
     }
 }
 function change_color_help_if_yes_help2(t,k,label_string,label_string_2){
-    if (!(temp_for_check[t].includes('color')) && !(temp_for_check[t].includes('->'))) {
+    if (!(temp_for_check[t].includes('color')) && !(temp_for_check[t].includes('->')) && !(inclued_operator(t))) {
         change_color_help_if_yes_help3(k,t,label_string,label_string_2);
 
     }

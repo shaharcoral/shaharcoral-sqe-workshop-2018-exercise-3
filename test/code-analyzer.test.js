@@ -55,7 +55,7 @@ function test1() {
     start(cfg);
     let dot=esgraph.dot(cfg,{counter:0,source:source});
     let arr=dot.split('\n');
-    let dot_ans=  'n0 [shape="square",style=filled ,color="green",label="-1-\n a = x + 1;\n b = a + y;\n c = 0;"]\nn3 [shape="diamond",style=filled ,color="green",label="-2-\nb < z"]\nn4 [shape="square",color="",label="-3-\nc = c + 5"]\nn5 [shape="square",style=filled ,color="green",label="-4-\nreturn c;"]\nn6 [shape="diamond",style=filled ,color="green",style=filled ,color="green",label="-5-\nb < z * 2"]\nn7 [shape="square",style=filled ,color="green",label="-6-\nc = c + x + 5"]\nn8 [shape="square",color="",label="-7-\nc = c + z + 5"]\nn18[label="",style=filled ,color=green]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n18[]\nn6 -> n7 [label="T"]\nn6 -> n8 [label="F"]\nn7 -> n18[]\nn8 -> n18[]\nn18->n5 []';
+    let dot_ans= 'n0 [shape="square",style=filled ,color="green",label="-1-\n a = x + 1;\n b = a + y;\n c = 0;"]\nn3 [shape="diamond",style=filled ,color="green",label="-2-\nb < z"]\nn4 [shape="square",color="",label="-3-\nc = c + 5"]\nn5 [shape="square",style=filled ,color="green",label="-4-\nreturn c;"]\nn6 [shape="diamond",style=filled ,color="green",label="-5-\nb < z * 2"]\nn7 [shape="square",style=filled ,color="green",label="-6-\nc = c + x + 5"]\nn8 [shape="square",color="",label="-7-\nc = c + z + 5"]\nn18[label="",style=filled ,color=green]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n18[]\nn6 -> n7 [label="T"]\nn6 -> n8 [label="F"]\nn7 -> n18[]\nn8 -> n18[]\nn18->n5 []';
     it('test1', () => {
         assert.equal(create_cfg(arr, dot, evals_color),dot_ans );
     });
@@ -212,7 +212,7 @@ function test11() {
     start(cfg);
     let dot=esgraph.dot(cfg,{counter:0,source:source});
     let arr=dot.split('\n');
-    let dot_ans=  'n0 [shape="square",style=filled ,color="green",label="-1-\n a = x + 1;\n b = a + y;\n c = 0;"]\nn3 [shape="diamond",style=filled ,color="green",label="-2-\nb == z"]\nn4 [shape="square",color="",label="-3-\nc = c + 5"]\nn5 [shape="square",style=filled ,color="green",label="-4-\nreturn c;"]\nn6 [shape="diamond",style=filled ,color="green",style=filled ,color="green",label="-5-\nb < z * 2"]\nn7 [shape="square",style=filled ,color="green",label="-6-\nc = c + x + 5"]\nn8 [shape="square",color="",label="-7-\nc = c + z + 5"]\nn18[label="",style=filled ,color=green]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n18[]\nn6 -> n7 [label="T"]\nn6 -> n8 [label="F"]\nn7 -> n18[]\nn8 -> n18[]\nn18->n5 []';
+    let dot_ans= 'n0 [shape="square",style=filled ,color="green",label="-1-\n a = x + 1;\n b = a + y;\n c = 0;"]\nn3 [shape="diamond",style=filled ,color="green",label="-2-\nb == z"]\nn4 [shape="square",color="",label="-3-\nc = c + 5"]\nn5 [shape="square",style=filled ,color="green",label="-4-\nreturn c;"]\nn6 [shape="diamond",style=filled ,color="green",label="-5-\nb < z * 2"]\nn7 [shape="square",style=filled ,color="green",label="-6-\nc = c + x + 5"]\nn8 [shape="square",color="",label="-7-\nc = c + z + 5"]\nn18[label="",style=filled ,color=green]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n18[]\nn6 -> n7 [label="T"]\nn6 -> n8 [label="F"]\nn7 -> n18[]\nn8 -> n18[]\nn18->n5 []';
     it('test11', () => {
         assert.equal(create_cfg(arr, dot, evals_color),dot_ans );
     });
