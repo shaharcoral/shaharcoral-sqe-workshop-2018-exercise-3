@@ -1,6 +1,7 @@
 
 let temp_for_check=[];
 const create_cfg = (arr,dot,evals_color) => {
+    found_if=false;
     help2(arr);
     help3(arr);
     change_color(arr,evals_color);
@@ -12,11 +13,12 @@ const create_cfg = (arr,dot,evals_color) => {
     help6(arr,arr_labels,indexs,index_start);
     dot=help7(arr,index_start,indexs);
     return dot;
+
 };
 
 export {create_cfg};
 
-
+let found_if=false;
 
 function change_color(arr,evals_color) {
     let has_if=false;
@@ -46,16 +48,19 @@ function change_color_help2(evals_color,i) {
     for (let j = 0; j < evals_color.length; j++) {
         j=change_color_help2_help(j,evals_color,i);
     }
+
 }
 function change_color_help2_help(j,evals_color,i){
-    if (evals_color[j].includes('if') && evals_color[j].includes('green')) {
-
+    if (evals_color[j].includes('if') && evals_color[j].includes('green') && found_if==false) {
+        found_if=true;
         j=change_color_help_if_yes(evals_color,i,j);
     }
-    else if (evals_color[j].includes('if') && evals_color[j].includes('red')) {
+
+    else if (evals_color[j].includes('if') ) {
         j=change_color_help_if_no(evals_color,i,j);
 
     }
+
     return j;
 }
 
