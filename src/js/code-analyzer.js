@@ -34,13 +34,12 @@ function change_color(arr,evals_color) {
 
 function  change_color_help(evals_color) {
     for (let i = 0; i < temp_for_check.length; i++) {
-        if (!(temp_for_check[i].includes('->')) && inclued_operator(i)) {//for every operator
+        if (!(temp_for_check[i].includes('->')) && inclued_operator(i)) {
             change_color_help2(evals_color,i);
         }
     }
     change_color_after();
 }
-
 
 
 function change_color_help2(evals_color,i) {
@@ -61,7 +60,7 @@ function change_color_help2_help(j,evals_color,i){
 }
 
 function change_color_help_if_no(evals_color,i,j) {
-    temp_for_check[i] = temp_for_check[i].replace(']', ',color="red"]');
+    temp_for_check[i] = temp_for_check[i].replace('[', '[color="red",');
     for (let t = i; t < temp_for_check.length; t++) {
 
         let label_arr = temp_for_check[i].split('[');
@@ -89,7 +88,7 @@ function check_if_change(k,label_string,label_string_2,t) {
 
     if (temp_for_check[k].includes('T') && temp_for_check[k].includes(label_string) && temp_for_check[k].includes(label_string_2)) {
 
-        temp_for_check[t] = temp_for_check[t].replace(']', ',color="red"]');
+        temp_for_check[t] = temp_for_check[t].replace('[', '[color="red",');
     }
     else{
         check_if_change_help(k,label_string,label_string_2,t);
@@ -99,12 +98,12 @@ function check_if_change(k,label_string,label_string_2,t) {
 function check_if_change_help(k,label_string,label_string_2,t) {
 
     if (temp_for_check[k].includes('F') && temp_for_check[k].includes(label_string) && temp_for_check[k].includes(label_string_2)) {
-        temp_for_check[t] = temp_for_check[t].replace(']', ',style=filled ,color="green"]');
+        temp_for_check[t] = temp_for_check[t].replace('[', '[style=filled ,color="green",');
     }
 }
 
 function change_color_help_if_yes(evals_color,i,j) {
-    temp_for_check[i] = temp_for_check[i].replace(']', ',style=filled ,color="green"]');
+    temp_for_check[i] = temp_for_check[i].replace('[', '[style=filled ,color="green",');
     for (let t = i; t < temp_for_check.length; t++) {
         let label_arr = temp_for_check[i].split('[');
         let label_string = label_arr[0];
@@ -131,7 +130,7 @@ function change_color_help_if_yes_help2(t,k,label_string,label_string_2){
 
 function change_color_help_if_yes_help3(k,t,label_string,label_string_2) {
     if (temp_for_check[k].includes('T') && temp_for_check[k].includes(label_string) && temp_for_check[k].includes(label_string_2)) {
-        temp_for_check[t] = temp_for_check[t].replace(']', ',style=filled ,color="green"]');
+        temp_for_check[t] = temp_for_check[t].replace('[', '[style=filled ,color="green",');
     }
     else {
         change_color_help_if_yes_help4(k, t, label_string, label_string_2);
@@ -141,7 +140,7 @@ function change_color_help_if_yes_help3(k,t,label_string,label_string_2) {
 
 function change_color_help_if_yes_help4(k,t,label_string,label_string_2) {
     if (temp_for_check[k].includes('F') && temp_for_check[k].includes(label_string) && temp_for_check[k].includes(label_string_2)) {
-        temp_for_check[t] = temp_for_check[t].replace(']', ',color="red"]');
+        temp_for_check[t] = temp_for_check[t].replace('[', '[color="red",');
     }
 }
 function change_color_after() {
@@ -169,11 +168,11 @@ function  change_color_after_help(index_check) {
         if (inclued_operator(i) && temp_for_check[i].includes('red')) {
             temp_for_check[i] = temp_for_check[i].replace('red', 'green');
             temp_for_check[i] = temp_for_check[i].replace('red', 'green');
-            temp_for_check[i] = temp_for_check[i].replace(']', ',style=filled ]');
+            temp_for_check[i] = temp_for_check[i].replace('[', '[style=filled ,');
 
         }
         else if (!(temp_for_check[i].includes('color'))) {
-            temp_for_check[i] = temp_for_check[i].replace(']', ',style=filled ,color="green"]');
+            temp_for_check[i] = temp_for_check[i].replace('[', '[style=filled ,color="green",');
         }
     }
 }
@@ -212,10 +211,10 @@ function get_index_start(arr){
     }
 }
 function help(index_end,index_before,arr){
-    let temp_arr = arr[index_end].split('label=');
+    //let temp_arr = arr[index_end].split('label=');
     let index_replace=arr[index_end].split('[');
-    temp_arr[0] = temp_arr[0].replace('"', '');
-    temp_arr[1] = temp_arr[1].replace('"', '');
+    //temp_arr[0] = temp_arr[0].replace('"', '');
+    //temp_arr[1] = temp_arr[1].replace('"', '');
     let index_replace0=arr[index_before].split('[');
 
     let index_start2=0;
@@ -240,15 +239,13 @@ function help3(arr) {
 function help3_help0(arr,i,index_end) {
     if(arr[i].includes('let') || (arr[i-1].includes('=') && arr[i].includes('='))){
         let temp_arr=arr[i-1].split('[');
-        let temp_arr_new=temp_arr[1].split(']');
-        let temp_arr_no_label1=temp_arr_new[0].split('label=');
+        let temp_arr_no_label1=arr[i-1].split('label=');
+        temp_arr_no_label1[1]=temp_arr_no_label1[1].substring(0,temp_arr_no_label1[1].length-1 );
         let temp_arr2=arr[i].split('[');
-        let temp_arr_new2=temp_arr2[1].split(']');
-        let temp_arr_no_label=temp_arr_new2[0].split('label=');
+        let temp_arr_no_label=arr[i].split('label=');
+        temp_arr_no_label[1]=temp_arr_no_label[1].substring(0,temp_arr_no_label[1].length-1 );
         temp_arr_no_label[1]=temp_arr_no_label[1].replace('"', '');
         temp_arr_no_label[1]=temp_arr_no_label[1].replace('"', '');
-        temp_arr_new[0]=temp_arr_new[0].replace('"', '');
-        temp_arr_new[0]=temp_arr_new[0].replace('"', '');
         temp_arr_no_label1[1]=temp_arr_no_label1[1].replace('"', '');
         temp_arr_no_label1[1]=temp_arr_no_label1[1].replace('"', '');
         temp_arr_no_label1[1]=temp_arr_no_label1[1].replace('let','');
@@ -348,7 +345,7 @@ function inclued_operator_label(label1,label2) {
 function  help4(arr) {
     for(let i=0;i<arr.length;i++){
         if( arr[i].includes('<') || (arr[i].includes('>') && !(arr[i].includes('->')) ) ){
-            arr[i]=arr[i].replace(']',',shape="diamond"]');
+            arr[i]=arr[i].replace('[','[shape="diamond",');
         }
         else{
             help4_help(arr,i);
@@ -357,7 +354,7 @@ function  help4(arr) {
 }
 function help4_help(arr,i) {
     if(arr[i].includes('==')){
-        arr[i]=arr[i].replace(']',',shape="diamond"]');
+        arr[i]=arr[i].replace('[','[shape="diamond",');
     }
     /* if((arr[i].includes('>=')) ||  (arr[i].includes('<='))){
         arr[i]=arr[i].replace(']',',shape="diamond"]');
@@ -374,7 +371,7 @@ function help4_help_help(arr,i) {
         arr[i]=arr[i].replace(']',',shape="diamond"]');
     }*/
     if(!(arr[i].includes('->'))){
-        arr[i]=arr[i].replace(']',',shape="square"]');
+        arr[i]=arr[i].replace('[','[shape="square",');
     }
 }
 
@@ -382,7 +379,7 @@ function  help5(arr) {
     for(let i=0;i<arr.length;i++) {
         if(!arr[i].includes('->') && arr[i].includes('label=') ){
             let temp_arr = arr[i].split('label=');
-            temp_arr[0] = temp_arr[0].replace('"', '');
+            //temp_arr[0] = temp_arr[0].replace('"', '');
             temp_arr[1] = temp_arr[1].replace('"', '');
             let index = i+1;
             arr[i] = temp_arr[0] + 'label=' + '"' + '-' + index + '-' + '\n' + temp_arr[1];

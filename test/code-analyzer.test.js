@@ -55,7 +55,7 @@ function test1() {
     start(cfg);
     let dot=esgraph.dot(cfg,{counter:0,source:source});
     let arr=dot.split('\n');
-    let dot_ans= 'n0 [label="-1-\n a = x + 1;\n b = a + y;\n c = 0;",style=filled ,color="green",shape="square"]\nn3 [label="-2-\nb < z",color="green",style=filled ,shape="diamond"]\nn4 [label="-3-\nc = c + 5",color="",shape="square"]\nn5 [label="-4-\nreturn c;",style=filled ,color="green",shape="square"]\nn6 [label="-5-\nb < z * 2",style=filled ,color="green",style=filled ,color="green",shape="diamond"]\nn7 [label="-6-\nc = c + x + 5",style=filled ,color="green",shape="square"]\nn8 [label="-7-\nc = c + z + 5",color="",shape="square"]\nn18[label="",style=filled ,color=green]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n18[]\nn6 -> n7 [label="T"]\nn6 -> n8 [label="F"]\nn7 -> n18[]\nn8 -> n18[]\nn18->n5 []';
+    let dot_ans=  'n0 [shape="square",style=filled ,color="green",label="-1-\n a = x + 1;\n b = a + y;\n c = 0;"]\nn3 [shape="diamond",style=filled ,color="green",label="-2-\nb < z"]\nn4 [shape="square",color="",label="-3-\nc = c + 5"]\nn5 [shape="square",style=filled ,color="green",label="-4-\nreturn c;"]\nn6 [shape="diamond",style=filled ,color="green",style=filled ,color="green",label="-5-\nb < z * 2"]\nn7 [shape="square",style=filled ,color="green",label="-6-\nc = c + x + 5"]\nn8 [shape="square",color="",label="-7-\nc = c + z + 5"]\nn18[label="",style=filled ,color=green]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n18[]\nn6 -> n7 [label="T"]\nn6 -> n8 [label="F"]\nn7 -> n18[]\nn8 -> n18[]\nn18->n5 []';
     it('test1', () => {
         assert.equal(create_cfg(arr, dot, evals_color),dot_ans );
     });
@@ -72,7 +72,7 @@ function test2() {
     start(cfg2);
     let dot1=esgraph1.dot(cfg2,{counter:0,source:source1});
     let arr1=dot1.split('\n');
-    let dot_ans1=  'n0 [label="-1-\n a = x + 1;\n b = a + y;\n c = 0;",shape="square"]\nn3 [label="-2-\na < z",shape="diamond"]\nn4 [label="-3-\nc = a + b\nz = c * 2\na++",shape="square"]\nn7 [label="-4-\nreturn z;",shape="square"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n7 [label="F"]\nn4 -> n3 []\n';
+    let dot_ans1=  'n0 [shape="square",label="-1-\n a = x + 1;\n b = a + y;\n c = 0;"]\nn3 [shape="diamond",label="-2-\na < z"]\nn4 [shape="square",label="-3-\nc = a + b\nz = c * 2\na++"]\nn7 [shape="square",label="-4-\nreturn z;"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n7 [label="F"]\nn4 -> n3 []\n';
     it('test2', () => {
         assert.equal(create_cfg(arr1, dot1, evals_color2),dot_ans1 );
     });
@@ -89,7 +89,7 @@ function test3() {
     start(cfg);
     let dot=esgraph.dot(cfg,{counter:0,source:source});
     let arr=dot.split('\n');
-    let dot_ans=  'n0 [label="-1-\n a = x + 1;\n b = a + y;\n c = 0;",shape="square"]\nn3 [label="-2-\na < z",shape="diamond"]\nn4 [label="-3-\nc++\na++",shape="square"]\nn6 [label="-4-\nreturn z;",shape="square"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
+    let dot_ans=   'n0 [shape="square",label="-1-\n a = x + 1;\n b = a + y;\n c = 0;"]\nn3 [shape="diamond",label="-2-\na < z"]\nn4 [shape="square",label="-3-\nc++\na++"]\nn6 [shape="square",label="-4-\nreturn z;"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
     it('test3', () => {
         assert.equal(create_cfg(arr, dot, evals_color),dot_ans );
     });
@@ -105,7 +105,7 @@ function test4() {
     start(cfg);
     let dot=esgraph.dot(cfg,{counter:0,source:source});
     let arr=dot.split('\n');
-    let dot_ans= 'n0 [label="-1-\n a = x + 1;\n b = a + y;\n c = 0;",shape="square"]\nn3 [label="-2-\na < z",shape="diamond"]\nn4 [label="-3-\nc++\na=a+1",shape="square"]\nn6 [label="-4-\nreturn z;",shape="square"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
+    let dot_ans= 'n0 [shape="square",label="-1-\n a = x + 1;\n b = a + y;\n c = 0;"]\nn3 [shape="diamond",label="-2-\na < z"]\nn4 [shape="square",label="-3-\nc++\na=a+1"]\nn6 [shape="square",label="-4-\nreturn z;"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
     it('test4', () => {
         assert.equal(create_cfg(arr, dot, evals_color),dot_ans );
     });
@@ -121,7 +121,7 @@ function test5() {
     start(cfg);
     let dot=esgraph.dot(cfg,{counter:0,source:source});
     let arr=dot.split('\n');
-    let dot_ans= 'n0 [label="-1-\n a = x + 1;\n b = a + y;\n c = 0;",shape="square"]\nn3 [label="-2-\na <= z",shape="diamond"]\nn4 [label="-3-\nc++\na=a+1",shape="square"]\nn6 [label="-4-\nreturn z;",shape="square"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
+    let dot_ans=  'n0 [shape="square",label="-1-\n a = x + 1;\n b = a + y;\n c = 0;"]\nn3 [shape="diamond",label="-2-\na <= z"]\nn4 [shape="square",label="-3-\nc++\na=a+1"]\nn6 [shape="square",label="-4-\nreturn z;"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
     it('test5', () => {
         assert.equal(create_cfg(arr, dot, evals_color),dot_ans );
     });
@@ -136,7 +136,7 @@ function test6() {
     start(cfg);
     let dot=esgraph.dot(cfg,{counter:0,source:source});
     let arr=dot.split('\n');
-    let dot_ans= 'n0 [label="-1-\n a = x + 1;\n b = a + y;\n c = 0;",shape="square"]\nn3 [label="-2-\na >= z",shape="diamond"]\nn4 [label="-3-\nc++\na=a+1",shape="square"]\nn6 [label="-4-\nreturn z;",shape="square"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
+    let dot_ans=  'n0 [shape="square",label="-1-\n a = x + 1;\n b = a + y;\n c = 0;"]\nn3 [shape="diamond",label="-2-\na >= z"]\nn4 [shape="square",label="-3-\nc++\na=a+1"]\nn6 [shape="square",label="-4-\nreturn z;"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
     it('test6', () => {
         assert.equal(create_cfg(arr, dot, evals_color),dot_ans );
     });
@@ -151,7 +151,7 @@ function test7() {
     start(cfg);
     let dot=esgraph.dot(cfg,{counter:0,source:source});
     let arr=dot.split('\n');
-    let dot_ans= 'n0 [label="-1-\n a = x + 1;\n b = a + y;\n c = 0;",shape="square"]\nn3 [label="-2-\na < z & a<1",shape="diamond"]\nn4 [label="-3-\nc++\na=a+1",shape="square"]\nn6 [label="-4-\nreturn z;",shape="square"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
+    let dot_ans=  'n0 [shape="square",label="-1-\n a = x + 1;\n b = a + y;\n c = 0;"]\nn3 [shape="diamond",label="-2-\na < z & a<1"]\nn4 [shape="square",label="-3-\nc++\na=a+1"]\nn6 [shape="square",label="-4-\nreturn z;"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
     it('test7', () => {
         assert.equal(create_cfg(arr, dot, evals_color),dot_ans );
     });
@@ -166,7 +166,7 @@ function test8() {
     start(cfg);
     let dot=esgraph.dot(cfg,{counter:0,source:source});
     let arr=dot.split('\n');
-    let dot_ans= 'n0 [label="-1-\n a = x + 1;\n b = a + y;\n c = 0;",shape="square"]\nn3 [label="-2-\na < z && a<1",shape="diamond"]\nn4 [label="-3-\nc++\na=a+1",shape="square"]\nn6 [label="-4-\nreturn z;",shape="square"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
+    let dot_ans=  'n0 [shape="square",label="-1-\n a = x + 1;\n b = a + y;\n c = 0;"]\nn3 [shape="diamond",label="-2-\na < z && a<1"]\nn4 [shape="square",label="-3-\nc++\na=a+1"]\nn6 [shape="square",label="-4-\nreturn z;"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
     it('test8', () => {
         assert.equal(create_cfg(arr, dot, evals_color),dot_ans );
     });
@@ -181,7 +181,7 @@ function test9() {
     start(cfg);
     let dot=esgraph.dot(cfg,{counter:0,source:source});
     let arr=dot.split('\n');
-    let dot_ans= 'n0 [label="-1-\n a = x + 1;\n b = a + y;\n c = 0;",shape="square"]\nn3 [label="-2-\na < z | a<1",shape="diamond"]\nn4 [label="-3-\nc++\na=a+1",shape="square"]\nn6 [label="-4-\nreturn z;",shape="square"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
+    let dot_ans=  'n0 [shape="square",label="-1-\n a = x + 1;\n b = a + y;\n c = 0;"]\nn3 [shape="diamond",label="-2-\na < z | a<1"]\nn4 [shape="square",label="-3-\nc++\na=a+1"]\nn6 [shape="square",label="-4-\nreturn z;"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
     it('test9', () => {
         assert.equal(create_cfg(arr, dot, evals_color),dot_ans );
     });
@@ -196,7 +196,7 @@ function test10() {
     start(cfg);
     let dot=esgraph.dot(cfg,{counter:0,source:source});
     let arr=dot.split('\n');
-    let dot_ans= 'n0 [label="-1-\n a = x + 1;\n b = a + y;\n c = 0;",shape="square"]\nn3 [label="-2-\na < z || a<1",shape="diamond"]\nn4 [label="-3-\nc++\na=a+1",shape="square"]\nn6 [label="-4-\nreturn z;",shape="square"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
+    let dot_ans= 'n0 [shape="square",label="-1-\n a = x + 1;\n b = a + y;\n c = 0;"]\nn3 [shape="diamond",label="-2-\na < z || a<1"]\nn4 [shape="square",label="-3-\nc++\na=a+1"]\nn6 [shape="square",label="-4-\nreturn z;"]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n3 []\n';
     it('test10', () => {
         assert.equal(create_cfg(arr, dot, evals_color),dot_ans );
     });
@@ -212,7 +212,7 @@ function test11() {
     start(cfg);
     let dot=esgraph.dot(cfg,{counter:0,source:source});
     let arr=dot.split('\n');
-    let dot_ans= 'n0 [label="-1-\n a = x + 1;\n b = a + y;\n c = 0;",style=filled ,color="green",shape="square"]\nn3 [label="-2-\nb == z",color="green",style=filled ,shape="diamond"]\nn4 [label="-3-\nc = c + 5",color="",shape="square"]\nn5 [label="-4-\nreturn c;",style=filled ,color="green",shape="square"]\nn6 [label="-5-\nb < z * 2",style=filled ,color="green",style=filled ,color="green",shape="diamond"]\nn7 [label="-6-\nc = c + x + 5",style=filled ,color="green",shape="square"]\nn8 [label="-7-\nc = c + z + 5",color="",shape="square"]\nn18[label="",style=filled ,color=green]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n18[]\nn6 -> n7 [label="T"]\nn6 -> n8 [label="F"]\nn7 -> n18[]\nn8 -> n18[]\nn18->n5 []';
+    let dot_ans=  'n0 [shape="square",style=filled ,color="green",label="-1-\n a = x + 1;\n b = a + y;\n c = 0;"]\nn3 [shape="diamond",style=filled ,color="green",label="-2-\nb == z"]\nn4 [shape="square",color="",label="-3-\nc = c + 5"]\nn5 [shape="square",style=filled ,color="green",label="-4-\nreturn c;"]\nn6 [shape="diamond",style=filled ,color="green",style=filled ,color="green",label="-5-\nb < z * 2"]\nn7 [shape="square",style=filled ,color="green",label="-6-\nc = c + x + 5"]\nn8 [shape="square",color="",label="-7-\nc = c + z + 5"]\nn18[label="",style=filled ,color=green]\nn0 -> n3 []\nn3 -> n4 [label="T"]\nn3 -> n6 [label="F"]\nn4 -> n18[]\nn6 -> n7 [label="T"]\nn6 -> n8 [label="F"]\nn7 -> n18[]\nn8 -> n18[]\nn18->n5 []';
     it('test11', () => {
         assert.equal(create_cfg(arr, dot, evals_color),dot_ans );
     });
